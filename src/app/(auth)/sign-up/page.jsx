@@ -4,15 +4,17 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import Link from "next/link";
-import RightBanner from "./(auth)/_components/RightBanner";
+import RightBanner from "../_components/RightBanner";
 
-export default function Login() {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -25,7 +27,7 @@ export default function Login() {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white  py-10">
         <div className="w-full max-w-xl px-8">
           <h2 className="text-[32px] font-semibold text-center mb-2 tracking-[-0.5px]">
-            Access Your Dashboard
+            Sign up
           </h2>
 
           <p className="text-[16px] text-center text-gray1 mb-6">
@@ -115,40 +117,84 @@ export default function Login() {
                 )}
               </div>
 
-              {/* remember me */}
-
-              <div className="flex items-center justify-between text-sm text-gray-600">
-                <label className="flex items-center cursor-pointer select-none">
+              {/* confirm password */}
+              <div>
+                <div className="relative">
                   <input
-                    type="checkbox"
-                    className="custom-checkbox mr-2 h-[22px] w-[22px] appearance-none rounded-full border border-gray-300 bg-white checked:bg-primary checked:border-primary checked:text-white flex items-center justify-center focus:outline-none"
+                    type={showPassword1 ? "text" : "password"}
+                    name="confirm_pass"
+                    placeholder="Confirm password"
+                    className="authInp"
+                    {...register("confirm_pass", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                      validate: (value) =>
+                        value === watch("password") || "Passwords do not match",
+                    })}
                   />
-                  <span className="block text-[#170A00]">Remember me</span>
-                </label>
 
-                <Link
-                  href="/forgot-password"
-                  className="text-primary font-medium hover:underline"
-                >
-                  Forgot Password?
-                </Link>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword1((prev) => !prev)}
+                    className="cursor-pointer absolute top-1/2 right-3 -translate-1/2 text-gray-400 text-[20px]"
+                  >
+                    {showPassword1 ? <FaRegEyeSlash /> : <FaRegEye />}
+                  </button>
+                </div>
+
+                {errors.confirm_pass && (
+                  <p className="error-msg">{errors.confirm_pass.message}</p>
+                )}
               </div>
+            </div>
+
+            {/*  Terms */}
+
+            <div>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="custom-checkbox2 h-[18px] min-w-[18px] sm:h-[22px] sm:min-w-[22px] appearance-none rounded border border-gray-300 bg-white checked:bg-primary checked:border-primary checked:text-white flex items-center justify-center focus:outline-none"
+                  name="terms"
+                  {...register("terms", {
+                    required: "Agree with our terms and condition",
+                  })}
+                />
+
+                <p className="text-sm  text-gray-600 font-[500] select-none">
+                  I agree to the{" "}
+                  <Link href="#" className="text-primary hover:underline">
+                    Terms of Service
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="#" className="text-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                </p>
+              </label>
+
+              {errors.terms && (
+                <p className="error-msg">{errors.terms.message}</p>
+              )}
             </div>
 
             {/* submit btn */}
             <button
               type="submit"
-              className="w-full bg-primary hover:opacity-[.9] text-white font-semibold py-2 rounded-md h-[56px] cursor-pointer"
+              className="w-full bg-primary hover:opacity-[.9] text-white font-[500] py-2 rounded-md h-[56px] cursor-pointer"
             >
-              Login
+              Sign Up
             </button>
           </form>
 
           <p className="text-center text-[16px] text-[#404040] mt-6">
-            Don’t have an account?{" "}
-            <a href="#" className="text-primary font-medium hover:underline">
-              Sign Up
-            </a>
+            Already have an account?{" "}
+            <Link href="/" className="text-primary font-medium hover:underline">
+              Login
+            </Link>
           </p>
         </div>
       </div>
@@ -157,4 +203,6 @@ export default function Login() {
       <RightBanner></RightBanner>
     </div>
   );
-}
+};
+
+export default SignUp;
