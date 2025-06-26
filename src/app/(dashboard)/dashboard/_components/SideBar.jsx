@@ -10,33 +10,33 @@ const Sidebar = () => {
   let menuItems = [
     {
       path: "/dashboard",
-      icon: "/assets/images/icons/dashboard-ic.png",
+      icon: "/assets/images/icons/dashboard-ic.svg",
       label: "Dashboard",
     },
     {
       path: "/dashboard/request",
-      icon: "/assets/images/icons/request-ic.png",
+      icon: "/assets/images/icons/request-ic.svg",
       label: "Request",
     },
 
     {
       path: "/dashboard/vendor-task",
-      icon: "/assets/images/icons/users-ic.png",
+      icon: "/assets/images/icons/users-ic.svg",
       label: "Vendor Task",
     },
     {
       path: "/dashboard/property",
-      icon: "/assets/images/icons/property-ic.png",
+      icon: "/assets/images/icons/property-ic.svg",
       label: "Property",
     },
     {
       path: "/dashboard/message",
-      icon: "/assets/images/icons/message-ic.png",
+      icon: "/assets/images/icons/message-ic.svg",
       label: "Message",
     },
     {
       path: "/dashboard/financial",
-      icon: "/assets/images/icons/financial-ic.png",
+      icon: "/assets/images/icons/financial-ic.svg",
       label: "Financial",
     },
   ];
@@ -44,12 +44,12 @@ const Sidebar = () => {
   let customItems = [
     {
       path: "/dashboard/subscription",
-      icon: "/assets/images/icons/crown-ic.png",
+      icon: "/assets/images/icons/crown-ic.svg",
       label: "Subscription",
     },
     {
       path: "/dashboard/setting",
-      icon: "/assets/images/icons/gear-ic.png",
+      icon: "/assets/images/icons/gear-ic.svg",
       label: "Setting",
     },
   ];
@@ -59,7 +59,7 @@ const Sidebar = () => {
       <div className="mb-10">
         <Link href="/dashboard">
           <img
-            src="/assets/images/dash-logo.png"
+            src="/assets/images/dash-logo.svg"
             alt="logo"
             className="w-[150px] h-[50px] xl:w-[186px] xl:h-[64px]"
           />

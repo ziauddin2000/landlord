@@ -5,16 +5,9 @@ import { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import RightBanner from "../_components/RightBanner";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 
 const BusinessInfo = () => {
   // uploaded file name

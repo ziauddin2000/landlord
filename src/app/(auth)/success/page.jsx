@@ -9,7 +9,7 @@ const Success = () => {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white  py-10">
         <div className="w-full max-w-xl px-8">
           <Image
-            src="/assets/images/success-ic.png"
+            src="/assets/images/success-ic.svg"
             alt="Success"
             height={124}
             width={124}

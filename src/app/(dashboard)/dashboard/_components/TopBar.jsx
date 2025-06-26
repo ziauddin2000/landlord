@@ -61,22 +61,22 @@ const TopBar = () => {
     {
       path: "/dashboard/portfolio",
       title: "My Portfolio",
-      icon: "/assets/images/icons/graph-ic.png",
+      icon: "/assets/images/icons/graph-ic.svg",
     },
     {
       path: "/dashboard/subscription",
       title: "Subscription",
-      icon: "/assets/images/icons/crown-ic-black.png",
+      icon: "/assets/images/icons/crown-ic-black.svg",
     },
     {
       path: "/dashboard/setting",
       title: "Settings",
-      icon: "/assets/images/icons/gear-black-ic.png",
+      icon: "/assets/images/icons/gear-black-ic.svg",
     },
     {
       path: "/dashboard/logout",
       title: "Logout",
-      icon: "/assets/images/icons/logout-ic.png",
+      icon: "/assets/images/icons/logout-ic.svg",
     },
   ];
 
@@ -127,7 +127,7 @@ const TopBar = () => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <img
-              src="/assets/images/icons/bell-ic.png"
+              src="/assets/images/icons/bell-ic.svg"
               alt="Bell Icon"
               className="h-[20px] w-[20px] lg:h-[24px] lg:w-[24px]"
             />
@@ -138,9 +138,9 @@ const TopBar = () => {
               <div className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center gap-2">
                   <img
-                    src="/assets/images/icons/message-orange-ic.png"
+                    src="/assets/images/icons/message-orange-ic.svg"
                     alt="Message Icon"
-                    className="h-[45px] w-[45px]"
+                    className="h-[30px] w-[30px]"
                   />
                   <h3 className="font-[500] text-[16px] text-[#262626]">
                     Inbox
@@ -149,7 +149,7 @@ const TopBar = () => {
 
                 <div className="flex items-center gap-1">
                   <img
-                    src="assets/images/icons/check-orange-ic.png"
+                    src="assets/images/icons/check-orange-ic.svg"
                     alt="Check Icon"
                   />
                   <span className="text-sm text-primary cursor-pointer">
@@ -195,7 +195,7 @@ const TopBar = () => {
                 >
                   <span className="block">View more</span>
                   <img
-                    src="assets/images/icons/angle-bottom-ic.png"
+                    src="assets/images/icons/angle-bottom-ic.svg"
                     alt="Angle Bottom"
                     className="w-[14px]"
                   />
@@ -208,7 +208,7 @@ const TopBar = () => {
         {/* Premium Plan */}
         <button className="cursor-pointer flex items-center gap-2 hover:bg-gray-100 rounded-full p-2">
           <img
-            src="/assets/images/icons/crown-ic-black.png"
+            src="/assets/images/icons/crown-ic-black.svg"
             alt="Premium Plan"
             className="h-[20px] w-[20px] lg:h-[24px] lg:w-[24px]"
           />

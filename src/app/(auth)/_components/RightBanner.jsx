@@ -9,7 +9,7 @@ const RightBanner = () => {
       <div className="absolute inset-0 bg-opacity-60 z-0"></div>
       <div className="z-10">
         <Image
-          src="/assets/images/logo.png"
+          src="/assets/images/logo.svg"
           alt="Logo"
           height={250}
           width={120}

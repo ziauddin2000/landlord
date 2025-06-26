@@ -49,7 +49,7 @@ const InvestmentProfile = () => {
           <div className="flex justify-between items-start mb-4">
             <div className="flex flex-col sm:flex-row items-start md:items-center gap-4">
               <img
-                src="/assets/images/user-profile.svg"
+                src="https://github.com/shadcn.png"
                 alt="User"
                 className="w-20 h-20 rounded-full object-cover border"
               />
@@ -151,7 +151,7 @@ const InvestmentProfile = () => {
             </div>
           </div>
 
-          <button className="mt-10 bg-primary hover:opacity-[.9] text-white text-[16px] py-2 px-4 rounded-md cursor-pointer">
+          <button className="mt-10 bg-primary hover:bg-[#c77700] text-white text-[16px] py-2 px-4 rounded-md cursor-pointer">
             View All
           </button>
         </div>
