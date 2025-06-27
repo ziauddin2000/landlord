@@ -9,7 +9,7 @@ import { LuClipboardPenLine } from "react-icons/lu";
 
 import Link from "next/link";
 
-const TopBar = () => {
+const TopBar = ({ handleSideBar }) => {
   // Notification Data
   const notifications = [
     {
@@ -100,7 +100,10 @@ const TopBar = () => {
     <div className="sticky top-0 z-50 flex justify-between items-center px-3 py-4 sm:px-4 sm:py-4 lg:px-7 lg:py-4 bg-white shadow">
       {/* Left: Title */}
       <div className="flex items-center gap-2">
-        <button className="block lg:hidden cursor-pointer hover:bg-gray-100 rounded-full p-2">
+        <button
+          onClick={handleSideBar}
+          className="block lg:hidden cursor-pointer hover:bg-gray-100 rounded-full p-2"
+        >
           <FaBarsStaggered className="text-[20px] lg:text-[22px]" />
         </button>
         <h1 className="hidden sm:block text-[24px] lg:text-[25px] xl:text-[32px] font-[600] text-[#170A00]">

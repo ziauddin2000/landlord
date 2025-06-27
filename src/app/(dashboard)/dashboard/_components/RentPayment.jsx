@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
+import DatePicker from "@/components/ui/date-picker";
 
 // Dummy data
 const data = [
@@ -138,11 +139,9 @@ const RentPayment = () => {
               </Select>
             </div>
             <div className="w-full sm:w-auto sm:w-[170px] md:flex-1 md:min-w-[120px] md:max-w-[170px] min-w-0">
-              <Input
-                type="date"
+              <DatePicker
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="bg-muted border-none focus-visible:ring-0 focus-visible:border-ring rounded-md w-full"
+                onChange={setDate}
                 placeholder="Select date"
               />
             </div>

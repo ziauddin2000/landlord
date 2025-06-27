@@ -5,10 +5,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { FiPlus, FiSearch } from "react-icons/fi";
 
 const PropertyList = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(3);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("All");
+
   const properties = [
     {
       id: 1,
@@ -27,7 +32,7 @@ const PropertyList = () => {
     },
     {
       id: 2,
-      status: "For Rent",
+      status: "For Sale",
       name: "Elm Apartment",
       price: "$3,000",
       address: "1234 Elm Street, New York, NY 10001",
@@ -55,50 +60,270 @@ const PropertyList = () => {
       agent: "Wade Warren",
       agentImg: "assets/images/user-03.jpg",
     },
+    {
+      id: 4,
+      status: "For Sale",
+      name: "Sunset Villa",
+      price: "$4,500",
+      address: "5678 Sunset Blvd, Los Angeles, CA 90210",
+      beds: 3,
+      baths: 2,
+      lease: "2 Years",
+      floor: "5 Floor",
+      size: "1200 sq ft",
+      image: "assets/images/property-01.jpg",
+      agent: "Sarah Johnson",
+      agentImg: "assets/images/user-02.jpg",
+    },
+    {
+      id: 5,
+      status: "For Rent",
+      name: "Downtown Loft",
+      price: "$2,800",
+      address: "901 Downtown Ave, Chicago, IL 60601",
+      beds: 1,
+      baths: 1,
+      lease: "1 Year",
+      floor: "8 Floor",
+      size: "750 sq ft",
+      image: "assets/images/property-02.jpg",
+      agent: "Mike Chen",
+      agentImg: "assets/images/user-03.jpg",
+    },
+    {
+      id: 6,
+      status: "For Sale",
+      name: "Garden House",
+      price: "$5,200",
+      address: "345 Garden St, Miami, FL 33101",
+      beds: 4,
+      baths: 3,
+      lease: "3 Years",
+      floor: "2 Floor",
+      size: "1800 sq ft",
+      image: "assets/images/property-03.jpg",
+      agent: "Lisa Rodriguez",
+      agentImg: "assets/images/user-01.jpg",
+    },
+    {
+      id: 7,
+      status: "For Rent",
+      name: "Mountain View",
+      price: "$3,800",
+      address: "789 Mountain Rd, Denver, CO 80201",
+      beds: 2,
+      baths: 2,
+      lease: "1 Year",
+      floor: "15 Floor",
+      size: "1100 sq ft",
+      image: "assets/images/property-01.jpg",
+      agent: "David Wilson",
+      agentImg: "assets/images/user-02.jpg",
+    },
+    {
+      id: 8,
+      status: "For Sale",
+      name: "Beachfront Condo",
+      price: "$6,500",
+      address: "123 Beach Dr, San Diego, CA 92101",
+      beds: 3,
+      baths: 2,
+      lease: "2 Years",
+      floor: "10 Floor",
+      size: "1400 sq ft",
+      image: "assets/images/property-02.jpg",
+      agent: "Emma Davis",
+      agentImg: "assets/images/user-03.jpg",
+    },
+    {
+      id: 9,
+      status: "For Rent",
+      name: "City Center Apartment",
+      price: "$3,200",
+      address: "456 City Center Ave, Boston, MA 02101",
+      beds: 2,
+      baths: 1,
+      lease: "1 Year",
+      floor: "20 Floor",
+      size: "900 sq ft",
+      image: "assets/images/property-03.jpg",
+      agent: "John Smith",
+      agentImg: "assets/images/user-01.jpg",
+    },
+    {
+      id: 10,
+      status: "For Sale",
+      name: "Luxury Penthouse",
+      price: "$8,500",
+      address: "789 Luxury Blvd, Las Vegas, NV 89101",
+      beds: 4,
+      baths: 3,
+      lease: "5 Years",
+      floor: "25 Floor",
+      size: "2000 sq ft",
+      image: "assets/images/property-01.jpg",
+      agent: "Maria Garcia",
+      agentImg: "assets/images/user-02.jpg",
+    },
+    {
+      id: 11,
+      status: "For Rent",
+      name: "Studio Loft",
+      price: "$1,800",
+      address: "321 Studio St, Portland, OR 97201",
+      beds: 0,
+      baths: 1,
+      lease: "6 Months",
+      floor: "3 Floor",
+      size: "500 sq ft",
+      image: "assets/images/property-02.jpg",
+      agent: "Alex Johnson",
+      agentImg: "assets/images/user-03.jpg",
+    },
+    {
+      id: 12,
+      status: "For Sale",
+      name: "Family Home",
+      price: "$7,200",
+      address: "654 Family Rd, Austin, TX 73301",
+      beds: 5,
+      baths: 4,
+      lease: "10 Years",
+      floor: "1 Floor",
+      size: "2500 sq ft",
+      image: "assets/images/property-03.jpg",
+      agent: "Robert Brown",
+      agentImg: "assets/images/user-01.jpg",
+    },
   ];
+
+  // Filter properties based on search and status
+  const filteredProperties = useMemo(() => {
+    return properties.filter((property) => {
+      const searchMatch =
+        property.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.agent.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.price.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const statusMatch =
+        filterStatus === "All" || property.status === filterStatus;
+
+      return searchMatch && statusMatch;
+    });
+  }, [searchTerm, filterStatus]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProperties = filteredProperties.slice(startIndex, endIndex);
+
+  // Reset to first page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterStatus]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Generate page numbers to show (dynamic for large datasets)
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5; // Show more pages for better navigation
+
+    if (totalPages <= maxVisiblePages) {
+      // Show all pages if total is small
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // For large datasets, show smart pagination
+      if (currentPage <= 3) {
+        // Near the beginning
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push("...");
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        // Near the end
+        pages.push(1);
+        pages.push("...");
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        // In the middle
+        pages.push(1);
+        pages.push("...");
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push("...");
+        pages.push(totalPages);
+      }
+    }
+    return pages;
+  };
 
   return (
     <div className="py-3 ">
       <div className="p-6 bg-white rounded-xl shadow-sm">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center gap-4 mb-6">
-          <h2 className="text-[24px] font-[600] sm:whitespace-nowrap text-t-primary">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-6">
+          <h2 className="text-[20px] sm:text-[22px] lg:text-[24px] font-[600] text-t-primary whitespace-nowrap">
             My Property List
           </h2>
-          <div className="flex flex-wrap sm:flex-row items-center gap-y-4 gap-x-2 sm:gap-4 w-full md:w-auto">
-            <div className="relative">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+            <div className="relative flex-1 sm:flex-none">
               <input
                 type="text"
                 placeholder="Search..."
-                className="bg-[#f5f5f5] rounded-md px-4 py-2 pl-10 w-[200px] sm:w-[180px] md:w-[250px] lg:w-[180px] xl:w-[250px] hover:outline-0 hover:border-0 focus:outline-0 focus:border-0"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-[#f5f5f5] rounded-md px-4 py-2.5 pl-10 w-full sm:w-[200px] md:w-[220px] lg:w-[180px] xl:w-[220px] hover:outline-0 hover:border-0 focus:outline-0 focus:border-0 text-sm"
               />
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 " />
+              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
             </div>
 
-            <button className="text-[16px] sm:text-[14px] md:text-[16px] bg-primary text-white px-3 lg:px-2  xl:px-3 py-2 rounded-md cursor-pointer hover:bg-[#c77700] transition flex items-center gap-1 whitespace-nowrap">
-              <FiPlus />
+            <button className="text-[14px] sm:text-[15px] lg:text-[16px] bg-primary text-white px-4 py-2.5 rounded-md cursor-pointer hover:bg-[#c77700] transition flex items-center justify-center gap-2 whitespace-nowrap">
+              <FiPlus className="w-4 h-4" />
               <span>Add New Property</span>
             </button>
 
-            <Select>
-              <SelectTrigger className="w-[120px] cursor-pointer focus:outline-0 ">
+            <Select value={filterStatus} onValueChange={setFilterStatus}>
+              <SelectTrigger className="w-full sm:w-[120px] cursor-pointer focus:outline-0 text-sm">
                 <SelectValue placeholder="All" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="All">All</SelectItem>
-                <SelectItem value="Popular">Popular</SelectItem>
-                <SelectItem value="Latest">Latest</SelectItem>
+                <SelectItem value="For Rent">For Rent</SelectItem>
+                <SelectItem value="For Sale">For Sale</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
 
         {/* Property Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-          {properties.map((property) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+          {currentProperties.map((property) => (
             <div
               key={property.id}
-              className="bg-white shadow-md rounded-xl overflow-hidden"
+              className="bg-white shadow-md rounded-xl overflow-hidden min-w-0"
             >
               <div className="relative">
                 <img
@@ -122,46 +347,46 @@ const PropertyList = () => {
                   {property.address}
                 </p>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-[14px] font-[500] text-t-secondary mb-3">
-                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2">
+                <div className="grid grid-cols-2 2xl:grid-cols-3 gap-2 text-[14px] font-[500] text-t-secondary mb-3">
+                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2 min-w-0">
                     <img
                       src="/assets/images/icons/bed-ic.svg"
                       alt="bed"
-                      className="w-5 h-5"
+                      className="w-5 h-5 flex-shrink-0"
                     />
-                    <span>{property.beds} Beds</span>
+                    <span className="truncate">{property.beds} Beds</span>
                   </span>
-                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2">
+                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2 min-w-0">
                     <img
                       src="/assets/images/icons/buthtub-ic.svg"
                       alt="bed"
-                      className="w-5 h-5"
+                      className="w-5 h-5 flex-shrink-0"
                     />
-                    <span>{property.baths} Baths</span>
+                    <span className="truncate">{property.baths} Baths</span>
                   </span>
-                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2">
+                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2 min-w-0">
                     <img
                       src="/assets/images/icons/guest-house-ic.svg"
                       alt="bed"
-                      className="w-5 h-5"
+                      className="w-5 h-5 flex-shrink-0"
                     />
-                    <span>{property.lease}</span>
+                    <span className="truncate">{property.lease}</span>
                   </span>
-                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2">
+                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2 min-w-0">
                     <img
                       src="/assets/images/icons/floor-ic.svg"
                       alt="bed"
-                      className="w-5 h-5"
+                      className="w-5 h-5 flex-shrink-0"
                     />
-                    <span>{property.floor}</span>
+                    <span className="truncate">{property.floor}</span>
                   </span>
-                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2">
+                  <span className="px-2 py-2 border border-[#D6D6D6] rounded-md flex items-center gap-2 min-w-0">
                     <img
                       src="/assets/images/icons/sqr-ic.svg"
                       alt="bed"
-                      className="w-5 h-5"
+                      className="w-5 h-5 flex-shrink-0"
                     />
-                    <span>{property.size}</span>
+                    <span className="truncate">{property.size}</span>
                   </span>
                 </div>
 
@@ -184,27 +409,70 @@ const PropertyList = () => {
           ))}
         </div>
 
-        {/* Pagination */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 justify-between items-center text-sm text-t-secondary">
-          <p>Showing 5–40 of 126 results</p>
-          <div className="flex items-center *:cursor-pointer">
-            <button className="px-3 py-2 border border-[#EDEDED] rounded-tl-sm rounded-bl-sm hover:bg-gray-100">
-              Previous
-            </button>
-            <button className="px-4 py-2 bg-primary border border-primary text-white">
-              1
-            </button>
-            <button className="px-4 py-2 border border-[#EDEDED] hover:bg-gray-100">
-              2
-            </button>
-            <button className="px-4 py-2 border border-[#EDEDED] hover:bg-gray-100">
-              3
-            </button>
-            <button className="px-3 py-2 border border-[#EDEDED] rounded-tr-sm rounded-br-sm hover:bg-gray-100">
-              Next
-            </button>
+        {/* No results message */}
+        {currentProperties.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-500">
+              No properties found matching your criteria.
+            </p>
+            <p className="text-sm text-gray-400 mt-2">
+              Try adjusting your search or filter options.
+            </p>
           </div>
-        </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 0 && (
+          <div className="mt-6 flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 justify-between items-center text-sm text-t-secondary">
+            <p>
+              Showing {startIndex + 1}–
+              {Math.min(endIndex, filteredProperties.length)} of{" "}
+              {filteredProperties.length} results
+            </p>
+            <div className="flex items-center *:cursor-pointer">
+              <button
+                onClick={handlePrevious}
+                disabled={currentPage === 1}
+                className={`px-3 py-2 border border-[#EDEDED] rounded-tl-sm rounded-bl-sm ${
+                  currentPage === 1
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                Previous
+              </button>
+              {getPageNumbers().map((page, index) => (
+                <button
+                  key={index}
+                  onClick={() =>
+                    typeof page === "number" ? handlePageChange(page) : null
+                  }
+                  disabled={typeof page !== "number"}
+                  className={`px-4 py-2 border ${
+                    typeof page === "number"
+                      ? currentPage === page
+                        ? "bg-primary border-primary text-white"
+                        : "border-[#EDEDED] hover:bg-gray-100"
+                      : "border-[#EDEDED] text-gray-400 cursor-default"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+                className={`px-3 py-2 border border-[#EDEDED] rounded-tr-sm rounded-br-sm ${
+                  currentPage === totalPages
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

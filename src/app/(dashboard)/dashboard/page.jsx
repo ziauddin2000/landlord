@@ -13,15 +13,19 @@ const DashboardHome = () => {
   const closeModal = () => setIsOpen(false);
 
   return (
-    <div className="px-3 py-4 sm:px-4 sm:py-4 lg:px-7 lg:py-4 bg-[#f5f5f5] relative">
+    <div className="px-3 py-4 sm:px-4 sm:py-4 lg:px-7 lg:py-4 bg-[#f5f5f5] min-h-screen relative">
       {/* Popup */}
       {isOpen && (
         <div
           className={`fixed inset-0 z-60 flex items-center justify-center bg-[#7676768F] bg-opacity-50 transition-opacity ${
             isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
+          onClick={closeModal}
         >
-          <div className="bg-white px-5 py-8 sm:p-8 rounded-lg max-w-2xl w-[90%] shadow transform transition-all relative">
+          <div
+            className="bg-white px-5 py-8 sm:p-8 rounded-lg max-w-2xl w-[90%] shadow transform transition-all relative"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2 className="flex items-start sm:items-center gap-2">
               <CiGift className="text-[30px]" />
               <span className="text-[18px] font-[700] text-t-primary">

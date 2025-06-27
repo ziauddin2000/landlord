@@ -112,14 +112,20 @@
   left: 0px;
 }
 
-.notification-era::-webkit-scrollbar {
+.notification-era::-webkit-scrollbar,
+.investedProperty::-webkit-scrollbar {
   width: 4px;
 }
-.notification-era::-webkit-scrollbar-track {
+.notification-era::-webkit-scrollbar-track,
+.investedProperty::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-.notification-era::-webkit-scrollbar-thumb {
+.notification-era::-webkit-scrollbar-thumb,
+.investedProperty::-webkit-scrollbar-thumb {
   background: #88888874;
+}
+.investedProperty::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
 }
 
 :root {

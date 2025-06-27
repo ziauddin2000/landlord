@@ -1,20 +1,14 @@
 "use client";
 import Link from "next/link";
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-} from "recharts";
+import SummaryCard from "./SummaryCard";
+import InvestmentReturn from "./InvestmentReturn";
+import InvestmentChart from "./InvestmentChart";
 
 const InvestmentProfile = () => {
   // chart data
   const chartData = [
-    { name: "Jan", price: 100 },
+    { name: "Jan", price: 500 },
     { name: "Feb", price: 600 },
     { name: "Mar", price: 700 },
     { name: "April", price: 500 },
@@ -37,6 +31,14 @@ const InvestmentProfile = () => {
       icon: "/assets/images/icons/coin-ic.svg",
       name: "Invest Count",
       value: "$3",
+    },
+  ];
+
+  // Investment Return Data
+  const investmentReturnData = [
+    {
+      total: "$128,00.00",
+      return: "+$50 (0.5%)",
     },
   ];
 
@@ -159,7 +161,6 @@ const InvestmentProfile = () => {
 
       {/* Investor Portfolio */}
       <div className="w-full grid grid-cols-1 xl:grid-cols-3 gap-y-4 xl:gap-6 bg-[#f9f9f9] py-3">
-        {/* Left Main Portfolio Section */}
         <div className="col-span-2 bg-white rounded-xl p-6 shadow-sm">
           {/* Header */}
           <div className="flex justify-between items-center mb-4">
@@ -179,34 +180,9 @@ const InvestmentProfile = () => {
           {/* Main Content */}
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
             {/* Investment Return Section */}
-            <div className="bg-[#f8f8f8] rounded-xl p-6 flex flex-col items-center justify-center text-center space-y-5 col-span-1 sm:col-span-5">
-              <div>
-                <p className="text-[16px] text-t-secondary font-[500]">
-                  Total Investment Return
-                </p>
-                <h2 className="text-[32px] font-[700] text-t-primary">
-                  $128,00.00
-                </h2>
-
-                <div className="flex flex-wrap justify-center items-center gap-2 text-[16px] font-[500]">
-                  <img
-                    src="/assets/images/icons/graph-green.svg"
-                    alt="graph"
-                    className="w-[30px]"
-                  />
-                  <p className="text-[#04A755]">+$50 (0.5%)</p>
-                  <p>Monthly return</p>
-                </div>
-              </div>
-              <button className="bg-[#DE8704] text-white text-[16px] py-2 px-4 rounded-md hover:bg-[#c77700] w-fit flex items-center gap-1 cursor-pointer">
-                <img
-                  src="/assets/images/icons/withdraw-ic.svg"
-                  alt="withdraw"
-                  className="w-[20px]"
-                />
-                <span>Withdraw</span>
-              </button>
-            </div>
+            <InvestmentReturn
+              investmentReturnData={investmentReturnData}
+            ></InvestmentReturn>
 
             <div className="dashed-line hidden col-span-1 sm:col-span-1 sm:flex justify-center items-center">
               <img
@@ -218,43 +194,7 @@ const InvestmentProfile = () => {
 
             {/* Chart Section */}
             <div className="flex flex-col justify-between h-full col-span-1 sm:col-span-6">
-              {/* Tabs */}
-              <div className="flex justify-center md:justify-start gap-2 mb-2">
-                {["D", "W", "M", "Y"].map((label) => (
-                  <button
-                    key={label}
-                    className={`px-3 py-1 border rounded-sm text-[16px] font-[500] cursor-pointer ${
-                      label === "Y"
-                        ? "bg-white border border-primary text-primary font-semibold"
-                        : "border-gray-200 text-t-secondary"
-                    }`}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Chart */}
-              <ResponsiveContainer
-                width="100%"
-                height={200}
-                className="text-[12px] mt-5"
-              >
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="price"
-                    stroke="#FF9900"
-                    strokeWidth={1}
-                    dot={{ r: 4 }}
-                    activeDot={{ r: 6 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              <InvestmentChart chartData={chartData}></InvestmentChart>
             </div>
           </div>
         </div>
@@ -263,26 +203,7 @@ const InvestmentProfile = () => {
         <div className="flex flex-col sm:flex-row xl:flex-col gap-4 bg-white shadow-sm rounded-xl md:justify-between xl:justify-center p-5 ">
           {/* Summary Card */}
           {summaryData.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className=" bg-[#f5f5f5] rounded-xl py-6 px-5 flex flex-row sm:flex-col md:flex-row items-center gap-5 sm:w-[33%] xl:w-full"
-              >
-                <div className="bg-[#fff] p-3 rounded-md">
-                  <img
-                    src={item.icon}
-                    alt="icon"
-                    className="min-w-8 h-8 md:min-w-6 md:h-6 lg:min-w-8 lg:h-8"
-                  />
-                </div>
-                <div className="sm:text-center md:text-left">
-                  <h4 className="text-[24px] font-[700] text-t-primary">
-                    {item.value}
-                  </h4>
-                  <p className="text-[16px] text-t-secondary"> {item.name}</p>
-                </div>
-              </div>
-            );
+            return <SummaryCard key={index} item={item}></SummaryCard>;
           })}
         </div>
       </div>
