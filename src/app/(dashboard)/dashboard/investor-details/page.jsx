@@ -132,14 +132,16 @@ const InvestorDetails = () => {
   return (
     <div className="px-3 py-4 sm:px-4 sm:py-4 lg:px-7 lg:py-4 bg-[#f5f5f5] min-h-screen">
       {/* Breadcrumb */}
-      <Breadcrumb className="*:text-[18px] py-3">
+      <Breadcrumb className="*:text-[16px] py-3">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink href="#">Analytics</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="#">Portfolio Details</BreadcrumbLink>
+            <BreadcrumbLink href="#" className="text-t-primary">
+              Portfolio Details
+            </BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

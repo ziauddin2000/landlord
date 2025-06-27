@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { RxDownload } from "react-icons/rx";
 
 const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
   const [property, setProperty] = useState(null);
   const modalRef = useRef();
 
   // Dummy data for demonstration
+  // here it will match id then show the property info, Now id is 1 that's why working for only 1 id's
   const propertyInfo = [
     {
       id: 1,
@@ -62,14 +64,14 @@ const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
   if (!property) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex">
+    <div className="fixed inset-0 z-55 bg-black/40 flex">
       <div
         ref={modalRef}
-        className="ml-auto h-full w-[96%] max-w-[800px] bg-white rounded-l-2xl shadow-xl  overflow-y-auto relative p-10"
+        className="ml-auto h-full w-[96%] max-w-[800px] bg-white rounded-l-2xl shadow-xl  overflow-y-auto relative p-4 py-8 md:p-10"
       >
         {/* Close Button */}
         <button
-          className="absolute top-4 right-6 text-gray-400 hover:text-gray-700 text-2xl z-10"
+          className="absolute top-4 right-6 text-gray-400 hover:text-gray-700 text-2xl z-10 cursor-pointer"
           onClick={onClose}
         >
           <RxCross2 />
@@ -80,14 +82,16 @@ const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Left side */}
           <div>
+            {/* property image */}
             <div className="mb-4">
               <img
                 src={property.image}
                 alt={property.name}
                 className="w-full mb-4 rounded-xl object-cover"
               />
-              <div>
+              <div className="mb-4">
                 <div className="flex flex-wrap items-center gap-2 justify-between mb-4">
                   <h1 className="text-[18px] font-[500]">{property.name}</h1>
 
@@ -100,7 +104,7 @@ const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
                 </div>
                 <div className="flex items-center gap-2">
                   {property.isFirstLienHolder && (
-                    <span className="bg-[#FCF1E6] text-[#C9631E] text-sm font-[500] px-3 py-2 w-full rounded flex items-center gap-1">
+                    <span className="bg-[#FCF1E6] text-[#C9631E] text-sm font-[500] px-4 py-2 w-full rounded-sm flex items-center gap-1">
                       <img
                         src="/assets/images/icons/check-ic.svg"
                         alt="check"
@@ -112,58 +116,75 @@ const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <div className="text-xs text-gray-500">Profit Share</div>
-                <div className="font-semibold text-base">
-                  {property.profitShare}
-                </div>
+            {/* profit info */}
+            <div className="border border-[#E5E5E5] rounded-md p-4 space-y-2 mb-4">
+              <div className="flex items-center gap-2 justify-between">
+                <div className="text-sm text-t-secondary">Profit Share</div>
+                <div className="font-[500] text-sm">{property.profitShare}</div>
               </div>
-              <div>
-                <div className="text-xs text-gray-500">Estimated Duration</div>
-                <div className="font-semibold text-base">
+              <div className="flex items-center gap-2 justify-between">
+                <div className="text-sm text-t-secondary">
+                  Estimated Duration
+                </div>
+                <div className="font-[500] text-sm">
                   {property.estimatedDuration}
                 </div>
               </div>
-              <div>
-                <div className="text-xs text-gray-500">Lock-In Period</div>
-                <div className="font-semibold text-base">
+              <div className="flex items-center gap-2 justify-between">
+                <div className="text-sm text-t-secondary">Lock-In Period</div>
+                <div className="font-[500] text-sm">
                   {property.lockInPeriod}
                 </div>
               </div>
             </div>
+            {/* investment details */}
             <div className="mb-4">
-              <div className="font-semibold mb-2">Investment Details</div>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <div className="text-gray-500">Investment Amount</div>
-                  <div>{property.investmentAmount}</div>
+              <div className="font-[500] text-t-primary text-[18px] mb-2">
+                Investment Details
+              </div>
+              <div className="border border-[#E5E5E5] rounded-md p-4 space-y-2 mb-4">
+                <div className="flex items-center gap-2 justify-between">
+                  <div className="text-sm text-t-secondary">
+                    Investment Amount
+                  </div>
+                  <div className="font-[500] text-sm">
+                    {property.investmentAmount}
+                  </div>
                 </div>
-                <div>
-                  <div className="text-gray-500">Start Date</div>
-                  <div>{property.startDate}</div>
+                <div className="flex items-center gap-2 justify-between">
+                  <div className="text-sm text-t-secondary">Start Date</div>
+                  <div className="font-[500] text-sm">{property.startDate}</div>
                 </div>
-                <div>
-                  <div className="text-gray-500">Project End</div>
-                  <div>{property.projectEnd}</div>
+                <div className="flex items-center gap-2 justify-between">
+                  <div className="text-sm text-t-secondary">Project End</div>
+                  <div className="font-[500] text-sm">
+                    {property.projectEnd}
+                  </div>
                 </div>
-                <div>
-                  <div className="text-gray-500">Lock-In Ends</div>
-                  <div>{property.lockInEnds}</div>
+                <div className="flex items-center gap-2 justify-between">
+                  <div className="text-sm text-t-secondary">Lock-In Ends</div>
+                  <div className="font-[500] text-sm">
+                    {property.lockInEnds}
+                  </div>
                 </div>
-                <div>
-                  <div className="text-gray-500">Exit Condition</div>
-                  <div>{property.exitCondition}</div>
+                <div className="flex items-center gap-2 justify-between">
+                  <div className="text-sm text-t-secondary">Exit Condition</div>
+                  <div className="font-[500] text-sm">
+                    {property.exitCondition}
+                  </div>
                 </div>
               </div>
             </div>
+            {/* Documents */}
             <div>
-              <div className="font-semibold mb-2">Documents</div>
+              <div className="font-[500] text-t-primary text-[18px] mb-2">
+                Documents
+              </div>
               <div className="space-y-2">
                 {property.documents.map((doc) => (
                   <div
                     key={doc.name}
-                    className="flex items-center bg-gray-50 rounded px-3 py-2"
+                    className="flex items-center bg-white border border-[#E5E5E5] hover:bg-[#F5F5F5] transition-all duration-300 rounded-lg px-3 py-4 cursor-pointer"
                   >
                     <img
                       src="/assets/images/icons/pdf-ic.svg"
@@ -172,19 +193,7 @@ const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
                     />
                     <span className="flex-1 text-sm">{doc.name}</span>
                     <button>
-                      <svg
-                        className="w-5 h-5 text-gray-400 hover:text-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-                        />
-                      </svg>
+                      <RxDownload />
                     </button>
                   </div>
                 ))}
@@ -192,43 +201,70 @@ const InvestmentPerformanceModal = ({ propertyId, onClose }) => {
             </div>
           </div>
 
-          <div className="p-6 pt-0 overflow-y-auto flex-1">
-            <div className="font-semibold text-lg mb-4">
-              Profit Distribution
-            </div>
-            <div className="mb-6">
-              <table className="w-full text-sm">
-                <tbody>
-                  {property.profitDistribution.map((row, i) => (
-                    <tr
-                      key={row.field}
-                      className={
-                        i === property.profitDistribution.length - 1
-                          ? "font-bold text-primary"
-                          : ""
-                      }
-                    >
-                      <td className="py-1">{row.field}</td>
-                      <td className="py-1 text-right">{row.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="font-semibold text-lg mb-4">
-              Investment Return Summary
-            </div>
+          {/* Right side */}
+          <div>
+            {/* profit distribution */}
             <div>
-              <table className="w-full text-sm">
-                <tbody>
-                  {property.returnSummary.map((row) => (
-                    <tr key={row.field}>
-                      <td className="py-1">{row.field}</td>
-                      <td className="py-1 text-right">{row.value}</td>
+              <div className="font-[500] text-t-primary text-[18px] mb-2">
+                Profit Distribution
+              </div>
+              <div className="mb-4 border border-primary rounded-md p-4">
+                <table className="w-full text-sm">
+                  <tbody>
+                    <tr className="border-b border-[#E5E5E5]">
+                      <td className="py-2 text-t-secondary">Field</td>
+                      <td className="py-2 text-right font-[600]">Value</td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                    {property.profitDistribution.map((row, i) => (
+                      <tr
+                        key={row.field}
+                        className={
+                          i === property.profitDistribution.length - 1
+                            ? "font-[600] text-t-primary"
+                            : "border-b border-[#E5E5E5]"
+                        }
+                      >
+                        <td className="py-2 text-t-secondary">{row.field}</td>
+                        <td className="py-2 text-right text-t-primary font-[600]">
+                          {row.value}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* investment return summary */}
+            <div>
+              <div className="font-[500] text-t-primary text-[18px] mb-2">
+                Investment Return Summary
+              </div>
+              <div className="border border-[#E5E5E5] rounded-md p-4">
+                <table className="w-full text-sm">
+                  <tbody>
+                    <tr className="border-b border-[#E5E5E5]">
+                      <td className="py-2 text-t-secondary">Field</td>
+                      <td className="py-2 text-right font-[600]">Value</td>
+                    </tr>
+                    {property.returnSummary.map((row, i) => (
+                      <tr
+                        className={
+                          i === property.returnSummary.length - 1
+                            ? "font-[600] text-t-primary"
+                            : "border-b border-[#E5E5E5]"
+                        }
+                        key={row.field}
+                      >
+                        <td className="py-2 text-t-secondary">{row.field}</td>
+                        <td className="py-2 text-right  font-[600]">
+                          {row.value}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

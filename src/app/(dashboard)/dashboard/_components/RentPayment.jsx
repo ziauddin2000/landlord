@@ -91,6 +91,7 @@ const RentPayment = () => {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
   const [date, setDate] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Filtering logic
   const filteredData = data.filter((row) => {
@@ -103,6 +104,21 @@ const RentPayment = () => {
     const dateMatch = date ? row.paidDate === date : true;
     return searchMatch && statusMatch && dateMatch;
   });
+
+  // Pagination logic
+
+  const ROWS_PER_PAGE = 10;
+
+  const totalPages = Math.ceil(filteredData.length / ROWS_PER_PAGE);
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * ROWS_PER_PAGE,
+    currentPage * ROWS_PER_PAGE
+  );
+
+  // Reset to first page if filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [search, status, date]);
 
   return (
     <div className="py-3">
@@ -157,8 +173,8 @@ const RentPayment = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredData.length ? (
-              filteredData.map((row, idx) => (
+            {paginatedData.length ? (
+              paginatedData.map((row, idx) => (
                 <TableRow key={idx}>
                   <TableCell>{row.paidDate}</TableCell>
                   <TableCell>
@@ -267,6 +283,30 @@ const RentPayment = () => {
             )}
           </TableBody>
         </Table>
+        {/* Pagination */}
+        <div className="flex justify-end items-center mt-4 gap-2">
+          <button
+            className={`px-3 py-1 rounded  cursor-pointer ${
+              currentPage === 1 ? "bg-muted" : "bg-primary text-white "
+            }`}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className={`px-3 py-1 rounded  cursor-pointer ${
+              currentPage === totalPages ? "bg-muted" : "bg-primary text-white "
+            }`}
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages || totalPages === 0}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
