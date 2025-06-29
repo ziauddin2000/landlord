@@ -2,24 +2,24 @@ import React from "react";
 
 const analyticsData = [
   {
-    title: "Total Task",
-    value: "56",
-    icon: "/assets/images/icons/task-ic.svg",
+    title: "Properties",
+    value: "05",
+    icon: "/assets/images/icons/property-orange-ic.svg",
   },
   {
-    title: "Ongoing",
-    value: "110",
-    icon: "/assets/images/icons/timer-ic.svg",
+    title: "Active Tenants",
+    value: "03",
+    icon: "/assets/images/icons/screw-ic.svg",
   },
   {
-    title: "In Review",
-    value: "12",
-    icon: "/assets/images/icons/analytics-ic.svg",
+    title: "Rent Collection",
+    value: "$123,569",
+    icon: "/assets/images/icons/coin-ic.svg",
   },
   {
-    title: "Complete",
-    value: "200",
-    icon: "/assets/images/icons/check-circle-ic.svg",
+    title: "Balance",
+    value: "$123,569",
+    icon: "/assets/images/icons/coin-ic.svg",
   },
 ];
 
@@ -28,7 +28,8 @@ const Analytics = () => {
     <div className="py-3">
       {/* Section title */}
       <div className="flex justify-between items-center mb-5">
-        <p className="text-[#707070] text-[16px] font-[500]">Vendor Task</p>
+        <p className="text-[#707070] text-[16px] font-[500]">Analytic</p>
+        <p className="text-[#707070] text-[16px] font-[500]">Current Plan</p>
       </div>
 
       {/* Card */}

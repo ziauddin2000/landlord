@@ -49,9 +49,9 @@ const Sidebar = ({ handleSideBarClose }) => {
       label: "Subscription",
     },
     {
-      path: "/dashboard/setting",
+      path: "/dashboard/settings",
       icon: "/assets/images/icons/gear-ic.svg",
-      label: "Setting",
+      label: "Settings",
     },
   ];
   return (
