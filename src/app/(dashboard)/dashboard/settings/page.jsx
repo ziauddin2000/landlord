@@ -14,6 +14,7 @@ import PaymentSettings from "./_components/PaymentSettings";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("account-settings");
+  const [activeBreadcrumb, setActiveBreadcrumb] = useState("Account Settings");
   let tabs = [
     {
       label: "Account Settings",
@@ -35,7 +36,7 @@ const Settings = () => {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink className="text-t-primary">
-              Account settings
+              {activeBreadcrumb}
             </BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
@@ -54,9 +55,7 @@ const Settings = () => {
               value={tab.value}
               onClick={() => {
                 setActiveTab(tab.value);
-                setSearch("");
-                setStatus("all");
-                setDate("");
+                setActiveBreadcrumb(tab.label);
               }}
               className={`
                 px-3 py-3 rounded-md cursor-pointer text-sm sm:text-base font-[500]

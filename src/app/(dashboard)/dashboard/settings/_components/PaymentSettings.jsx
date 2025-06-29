@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
+import PaymentGateway from "./PaymentGateway";
 
 // Dummy data array
 const paymentMethods = [
@@ -21,6 +22,8 @@ const paymentMethods = [
 ];
 
 const PaymentSettings = () => {
+  const [showPaymentGateway, setShowPaymentGateway] = useState(false);
+
   // State for toggles - initialize from paymentMethods array
   const [toggles, setToggles] = useState(() => {
     const initialToggles = {};
@@ -36,6 +39,10 @@ const PaymentSettings = () => {
       [gateway]: !prev[gateway],
     }));
   };
+
+  if (showPaymentGateway) {
+    return <PaymentGateway onBack={() => setShowPaymentGateway(false)} />;
+  }
 
   return (
     <div className="py-8 px-6 bg-white shadow rounded-md">
@@ -92,6 +99,7 @@ const PaymentSettings = () => {
       <button
         type="button"
         className="mt-6 flex items-center gap-1 border px-4 py-3 rounded-md text-black text-sm font-medium hover:bg-primary hover:text-white transition-colors cursor-pointer"
+        onClick={() => setShowPaymentGateway(true)}
       >
         <span className="text-xl">
           <GoPlus />

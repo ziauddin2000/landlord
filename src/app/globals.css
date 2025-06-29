@@ -64,11 +64,11 @@
   }
 
   .authInp {
-    @apply w-full px-5 py-2 border border-[#C2C2C2] h-[56px] rounded-md focus:border-transparent focus:outline-none focus:ring-1 focus:ring-[#DD8800];
+    @apply w-full px-5 py-2 border border-[#C2C2C2] h-[56px] rounded-md  focus:outline-none focus:border-[#DD8800];
   }
 
   .authSelect {
-    @apply w-full px-5 py-2 border border-[#C2C2C2] h-[56px] rounded-md focus:border-transparent focus:outline-none focus:ring-1 focus:ring-[#DD8800];
+    @apply w-full px-5 py-2 border border-[#C2C2C2] h-[56px] rounded-md  focus:outline-none  focus:border-[#DD8800];
   }
 
   .otpInp {
