@@ -152,7 +152,7 @@ const TopBar = ({ handleSideBar }) => {
 
                 <div className="flex items-center gap-1">
                   <img
-                    src="assets/images/icons/check-orange-ic.svg"
+                    src="/assets/images/icons/check-orange-ic.svg"
                     alt="Check Icon"
                   />
                   <span className="text-sm text-primary cursor-pointer">

@@ -5,6 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 import React, { useState, useMemo } from "react";
 import { FiPlus, FiSearch } from "react-icons/fi";
 
@@ -26,9 +27,9 @@ const PropertyList = () => {
       lease: "1 Year",
       floor: "12 Floor",
       size: "950 sq ft",
-      image: "assets/images/property-01.jpg",
+      image: "/assets/images/property-01.jpg",
       agent: "Darlene Robertson",
-      agentImg: "assets/images/user-01.jpg",
+      agentImg: "/assets/images/user-01.jpg",
     },
     {
       id: 2,
@@ -41,9 +42,9 @@ const PropertyList = () => {
       lease: "1 Year",
       floor: "12 Floor",
       size: "950 sq ft",
-      image: "assets/images/property-02.jpg",
+      image: "/assets/images/property-02.jpg",
       agent: "Ralph Edwards",
-      agentImg: "assets/images/user-02.jpg",
+      agentImg: "/assets/images/user-02.jpg",
     },
     {
       id: 3,
@@ -56,9 +57,9 @@ const PropertyList = () => {
       lease: "1 Year",
       floor: "12 Floor",
       size: "950 sq ft",
-      image: "assets/images/property-03.jpg",
+      image: "/assets/images/property-03.jpg",
       agent: "Wade Warren",
-      agentImg: "assets/images/user-03.jpg",
+      agentImg: "/assets/images/user-03.jpg",
     },
     {
       id: 4,
@@ -71,9 +72,9 @@ const PropertyList = () => {
       lease: "2 Years",
       floor: "5 Floor",
       size: "1200 sq ft",
-      image: "assets/images/property-01.jpg",
+      image: "/assets/images/property-01.jpg",
       agent: "Sarah Johnson",
-      agentImg: "assets/images/user-02.jpg",
+      agentImg: "/assets/images/user-02.jpg",
     },
     {
       id: 5,
@@ -86,9 +87,9 @@ const PropertyList = () => {
       lease: "1 Year",
       floor: "8 Floor",
       size: "750 sq ft",
-      image: "assets/images/property-02.jpg",
+      image: "/assets/images/property-02.jpg",
       agent: "Mike Chen",
-      agentImg: "assets/images/user-03.jpg",
+      agentImg: "/assets/images/user-03.jpg",
     },
     {
       id: 6,
@@ -101,9 +102,9 @@ const PropertyList = () => {
       lease: "3 Years",
       floor: "2 Floor",
       size: "1800 sq ft",
-      image: "assets/images/property-03.jpg",
+      image: "/assets/images/property-03.jpg",
       agent: "Lisa Rodriguez",
-      agentImg: "assets/images/user-01.jpg",
+      agentImg: "/assets/images/user-01.jpg",
     },
     {
       id: 7,
@@ -116,9 +117,9 @@ const PropertyList = () => {
       lease: "1 Year",
       floor: "15 Floor",
       size: "1100 sq ft",
-      image: "assets/images/property-01.jpg",
+      image: "/assets/images/property-01.jpg",
       agent: "David Wilson",
-      agentImg: "assets/images/user-02.jpg",
+      agentImg: "/assets/images/user-02.jpg",
     },
     {
       id: 8,
@@ -131,9 +132,9 @@ const PropertyList = () => {
       lease: "2 Years",
       floor: "10 Floor",
       size: "1400 sq ft",
-      image: "assets/images/property-02.jpg",
+      image: "/assets/images/property-02.jpg",
       agent: "Emma Davis",
-      agentImg: "assets/images/user-03.jpg",
+      agentImg: "/assets/images/user-03.jpg",
     },
     {
       id: 9,
@@ -146,9 +147,9 @@ const PropertyList = () => {
       lease: "1 Year",
       floor: "20 Floor",
       size: "900 sq ft",
-      image: "assets/images/property-03.jpg",
+      image: "/assets/images/property-03.jpg",
       agent: "John Smith",
-      agentImg: "assets/images/user-01.jpg",
+      agentImg: "/assets/images/user-01.jpg",
     },
     {
       id: 10,
@@ -161,9 +162,9 @@ const PropertyList = () => {
       lease: "5 Years",
       floor: "25 Floor",
       size: "2000 sq ft",
-      image: "assets/images/property-01.jpg",
+      image: "/assets/images/property-01.jpg",
       agent: "Maria Garcia",
-      agentImg: "assets/images/user-02.jpg",
+      agentImg: "/assets/images/user-02.jpg",
     },
     {
       id: 11,
@@ -176,9 +177,9 @@ const PropertyList = () => {
       lease: "6 Months",
       floor: "3 Floor",
       size: "500 sq ft",
-      image: "assets/images/property-02.jpg",
+      image: "/assets/images/property-02.jpg",
       agent: "Alex Johnson",
-      agentImg: "assets/images/user-03.jpg",
+      agentImg: "/assets/images/user-03.jpg",
     },
     {
       id: 12,
@@ -191,9 +192,9 @@ const PropertyList = () => {
       lease: "10 Years",
       floor: "1 Floor",
       size: "2500 sq ft",
-      image: "assets/images/property-03.jpg",
+      image: "/assets/images/property-03.jpg",
       agent: "Robert Brown",
-      agentImg: "assets/images/user-01.jpg",
+      agentImg: "/assets/images/user-01.jpg",
     },
   ];
 
@@ -260,10 +261,12 @@ const PropertyList = () => {
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
             </div>
 
-            <button className="text-[14px] sm:text-[15px] lg:text-[16px] bg-primary text-white px-4 py-2.5 rounded-md cursor-pointer hover:bg-[#c77700] transition flex items-center justify-center gap-2 whitespace-nowrap">
-              <FiPlus className="w-4 h-4" />
-              <span>Add New Property</span>
-            </button>
+            <Link href="/dashboard/property/add">
+              <button className="text-[14px] sm:text-[15px] lg:text-[16px] bg-primary text-white px-4 py-2.5 rounded-md cursor-pointer hover:bg-[#c77700] transition flex items-center justify-center gap-2 whitespace-nowrap">
+                <FiPlus className="w-4 h-4" />
+                <span>Add New Property</span>
+              </button>
+            </Link>
 
             <Select value={filterStatus} onValueChange={setFilterStatus}>
               <SelectTrigger className="w-full sm:w-[120px] cursor-pointer focus:outline-0 text-sm">
@@ -361,9 +364,11 @@ const PropertyList = () => {
                   </span>
                 </div>
 
-                <button className="w-full border border-gray-300 rounded-md py-2 text-[16px] cursor-pointer font-medium hover:bg-gray-100">
-                  Details
-                </button>
+                <Link href={`/dashboard/property/${property.id}`}>
+                  <button className="w-full border border-gray-300 rounded-md py-2 text-[16px] cursor-pointer font-medium hover:bg-gray-100">
+                    Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

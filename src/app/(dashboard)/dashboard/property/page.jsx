@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-import AccountSettings from "./_components/AccountSettings";
+import { useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,19 +9,20 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PaymentSettings from "./_components/PaymentSettings";
+import MyPropertyList from "./_components/MyPropertyList";
+import InvestmentForProperty from "./_components/InvestmentForProperty";
 
-const Settings = () => {
-  const [activeTab, setActiveTab] = useState("account-settings");
-  const [activeBreadcrumb, setActiveBreadcrumb] = useState("Account Settings");
+const Property = () => {
+  const [activeTab, setActiveTab] = useState("my-property-list");
+  const [activeBreadcrumb, setActiveBreadcrumb] = useState("My Property List");
   let tabs = [
     {
-      label: "Account Settings",
-      value: "account-settings",
+      label: "My Property List",
+      value: "my-property-list",
     },
     {
-      label: "Payment Settings",
-      value: "payment-settings",
+      label: "Investment For Property",
+      value: "investment-for-property",
     },
   ];
 
@@ -32,7 +32,7 @@ const Settings = () => {
       <Breadcrumb className="*:text-[16px] py-3">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink>Settings</BreadcrumbLink>
+            <BreadcrumbLink>Property</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -42,14 +42,13 @@ const Settings = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-
       {/* tabs */}
       <Tabs
         value={activeTab}
         onValueChange={setActiveTab}
-        className="w-full py-3"
+        className="w-full py-3 "
       >
-        <TabsList className="py-3 flex flex-wrap gap-3 sm:gap-4 bg-transparent w-full sm:w-fit h-auto">
+        <TabsList className="flex flex-wrap gap-3 sm:gap-4 bg-transparent w-full sm:w-fit h-auto rounded-none p-0  border-b border-[#D6D6D6]">
           {tabs.map((tab, index) => (
             <TabsTrigger
               key={index}
@@ -59,9 +58,11 @@ const Settings = () => {
                 setActiveBreadcrumb(tab.label);
               }}
               className={`
-                px-3 py-3 rounded-md cursor-pointer text-sm sm:text-base font-[500]
-                bg-white border border-[#f5f5f5] text-t-secondary  
-                data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:border-primary
+                px-3 py-2 cursor-pointer text-sm sm:text-base font-[500]
+                bg-transparent border-b-2 border-transparent text-t-secondary  
+                rounded-none 
+                data-[state=active]:text-t-primary data-[state=active]:border-b-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent 
+                data-[state=active]:rounded-none 
                 transition 
               `}
             >
@@ -75,8 +76,10 @@ const Settings = () => {
           <TabsContent key={index} value={tab.value}>
             {activeTab === tab.value && (
               <>
-                {tab.value === "account-settings" && <AccountSettings />}
-                {tab.value === "payment-settings" && <PaymentSettings />}
+                {tab.value === "my-property-list" && <MyPropertyList />}
+                {tab.value === "investment-for-property" && (
+                  <InvestmentForProperty />
+                )}
               </>
             )}
           </TabsContent>
@@ -86,4 +89,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default Property;
