@@ -198,7 +198,7 @@ const TopBar = ({ handleSideBar }) => {
                 >
                   <span className="block">View more</span>
                   <img
-                    src="assets/images/icons/angle-bottom-ic.svg"
+                    src="/assets/images/icons/angle-bottom-ic.svg"
                     alt="Angle Bottom"
                     className="w-[14px]"
                   />
