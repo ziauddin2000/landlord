@@ -48,7 +48,7 @@ const Property = () => {
         onValueChange={setActiveTab}
         className="w-full py-3 "
       >
-        <TabsList className="flex flex-wrap gap-3 sm:gap-4 bg-transparent w-full sm:w-fit h-auto rounded-none p-0  border-b border-[#D6D6D6]">
+        <TabsList className="flex sm:gap-4 bg-transparent w-fit sm:w-fit h-auto rounded-none p-0  border-b border-[#D6D6D6]">
           {tabs.map((tab, index) => (
             <TabsTrigger
               key={index}
@@ -58,7 +58,7 @@ const Property = () => {
                 setActiveBreadcrumb(tab.label);
               }}
               className={`
-                px-3 py-2 cursor-pointer text-sm sm:text-base font-[500]
+                px-2 sm:px-3 py-2 cursor-pointer text-sm sm:text-base font-[500]
                 bg-transparent border-b-2 border-transparent text-t-secondary  
                 rounded-none 
                 data-[state=active]:text-t-primary data-[state=active]:border-b-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent 
