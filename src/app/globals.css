@@ -205,3 +205,43 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Chat Box Scrollbar Hidden */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chat-list::-webkit-scrollbar,
+.chat-box-container::-webkit-scrollbar {
+  width: 5px;
+}
+.chat-list::-webkit-scrollbar-track,
+.chat-box-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.chat-list::-webkit-scrollbar-thumb,
+.chat-box-container::-webkit-scrollbar-thumb {
+  background: #88888874;
+}
+.chat-list::-webkit-scrollbar-thumb,
+.chat-box-container::-webkit-scrollbar-thumb {
+  background: #c3c3c3;
+}
+
+/* Spark Wave */
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.8);
+  }
+}
+.animate-wave {
+  animation: wave 1s infinite linear;
+}
