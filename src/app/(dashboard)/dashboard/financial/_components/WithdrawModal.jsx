@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { RxDownload } from "react-icons/rx";
 
-const RentModal = ({ row, onClose }) => {
+const WithdrawModal = ({ row, onClose }) => {
   const [playingIndex, setPlayingIndex] = useState(null);
   const modalRef = useRef();
 
@@ -267,4 +267,4 @@ const RentModal = ({ row, onClose }) => {
   );
 };
 
-export default RentModal;
+export default WithdrawModal;
