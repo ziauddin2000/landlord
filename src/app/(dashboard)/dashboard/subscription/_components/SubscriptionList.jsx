@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { FaRegEye } from "react-icons/fa";
+import { FaCrown, FaRegEye } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -21,99 +21,61 @@ import {
 import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
 import DatePicker from "@/components/ui/date-picker";
-import RentModal from "./RentModal";
-import WithdrawModal from "./WithdrawModal";
+import SubscriptionModal from "./SubscriptionModal";
 
 // Dummy data
 const data = [
   {
     id: 1,
-    reqDate: "10/07/2025",
-    requestId: "RP-3021",
-    property: {
-      image: "../assets/images/property-01.jpg",
-      name: "Murphy House",
-      address: "4140 Parker Road",
-    },
-    amount: "$1,200",
-    method: "Bank",
-    status: "Approved",
+    paidDate: "April 28, 2025",
+    planType: "Trail",
+    amount: "Free",
+    method: "Credit Card",
+    status: "Trial",
   },
   {
     id: 2,
-    reqDate: "10/07/2025",
-    requestId: "RP-3022",
-    property: {
-      image: "../assets/images/property-02.jpg",
-      name: "Murphy House",
-      address: "4140 Parker Road",
-    },
-    amount: "$1,200",
-    method: "Bank",
-    status: "Pending",
+    paidDate: "April 28, 2025",
+    planType: "Premium",
+    amount: "$29.00",
+    method: "-",
+    status: "Paid",
   },
   {
     id: 3,
-    reqDate: "10/07/2025",
-    requestId: "RP-3023",
-    property: {
-      image: "../assets/images/property-03.jpg",
-      name: "Murphy House",
-      address: "4140 Parker Road",
-    },
-    amount: "$1,200",
-    method: "Bank",
-    property: {
-      image: "../assets/images/property-03.jpg",
-      name: "Murphy House",
-      address: "4140 Parker Road",
-    },
-    amount: "$1,200",
-    method: "Bank",
-    status: "Rejected",
+    paidDate: "April 28, 2025",
+    planType: "Basic",
+    amount: "Free",
+    method: "-",
+    status: "Free Plan",
   },
   {
     id: 4,
-    reqDate: "10/07/2025",
-    requestId: "RP-3023",
-    property: {
-      image: "../assets/images/property-03.jpg",
-      name: "Murphy House",
-      address: "4140 Parker Road",
-    },
-    amount: "$1,200",
-    method: "Bank",
-    status: "Request",
-    property: {
-      image: "../assets/images/property-03.jpg",
-      name: "Murphy House",
-      address: "4140 Parker Road",
-    },
-    amount: "$1,200",
-    method: "Bank",
+    paidDate: "April 28, 2025",
+    planType: "Premium",
+    amount: "$29.00",
+    method: "Credit Card",
     status: "Paid",
   },
 ];
 
-const statusOptions = [
-  { value: "all", label: "All " },
-  { value: "Approved", label: "Approved" },
-  { value: "Pending", label: "Pending" },
-  { value: "Paid", label: "Paid" },
-  { value: "Rejected", label: "Rejected" },
-];
-
 const headers = [
-  "Req Date",
-  "ID",
-  "Property",
+  "Paid Date",
+  "Plan Type",
   "Amount",
-  "Method",
+  "Methods",
   "Status",
   "Action",
 ];
 
-const WithdrawalTable = ({ handleDetails }) => {
+const statusOptions = [
+  { value: "all", label: "All " },
+  { value: "Trial", label: "Trial" },
+  { value: "Paid", label: "Paid" },
+  { value: "Free Plan", label: "Free Plan" },
+];
+
+const SubscriptionList = ({ handleDetails }) => {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
   const [date, setDate] = useState("");
@@ -136,10 +98,10 @@ const WithdrawalTable = ({ handleDetails }) => {
   // Filtering logic
   const filteredData = data.filter((row) => {
     const searchMatch =
-      row.property.name.toLowerCase().includes(search.toLowerCase()) ||
-      row.requestId.toLowerCase().includes(search.toLowerCase());
+      row.planType.toLowerCase().includes(search.toLowerCase()) ||
+      row.method.toLowerCase().includes(search.toLowerCase());
     const statusMatch = status === "all" ? true : row.status === status;
-    const dateMatch = date ? row.requestDate === date : true;
+    const dateMatch = date ? row.paidDate === date : true;
     return searchMatch && statusMatch && dateMatch;
   });
 
@@ -163,7 +125,7 @@ const WithdrawalTable = ({ handleDetails }) => {
         {/* Header with filters */}
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between mb-6 w-full">
           <h2 className="text-[24px] font-[600] text-t-primary mb-2 md:mb-0 flex-shrink-0">
-            My Withdrawals Lists
+            Subscription List
           </h2>
           <div className="flex flex-col gap-2 w-full sm:flex-row sm:flex-wrap sm:gap-2 md:gap-4 md:w-auto md:justify-end md:flex-wrap max-w-full min-w-0">
             <div className="relative w-full sm:w-auto sm:max-w-[220px] md:flex-1 md:min-w-[120px] md:max-w-[220px] min-w-0">
@@ -214,37 +176,24 @@ const WithdrawalTable = ({ handleDetails }) => {
               paginatedData.map((row, idx) => (
                 <TableRow key={idx}>
                   <TableCell>
-                    <h5 className="text-sm">{row.reqDate}</h5>
+                    <h5 className="text-sm">{row.paidDate}</h5>
                   </TableCell>
                   <TableCell>
-                    <h5 className="text-sm">{row.requestId}</h5>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-row gap-2 items-center">
-                      <div className="w-10 h-10 rounded-sm overflow-hidden">
-                        <img
-                          src={row.property.image}
-                          alt="property"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h5
-                          className="text-t-primary text-[14px] font-[500]"
-                          title={row.property.name}
-                        >
-                          {row.property.name.length > 20
-                            ? row.property.name.substring(0, 20) + "..."
-                            : row.property.name}
-                        </h5>
-                        <p
-                          className="text-t-secondary text-[12px]"
-                          title={row.property.address}
-                        >
-                          {row.property.address.substring(0, 20) + "..."}
-                        </p>
-                      </div>
-                    </div>
+                    <h5 className="text-sm font-medium">
+                      <span
+                        className={`w-fit flex items-center gap-2 ${
+                          row.planType === "Basic"
+                            ? "bg-[#FCF1E6] text-[#DD8800] px-2 py-1 rounded"
+                            : row.planType === "Trail" ||
+                              row.planType === "Premium"
+                            ? "bg-[#E6F0FF] text-[#2B7FFF] px-2 py-1 rounded"
+                            : "bg-[#F5F5F5] text-[#878787] px-2 py-1 rounded"
+                        }`}
+                      >
+                        <FaCrown />
+                        <span>{row.planType}</span>
+                      </span>
+                    </h5>
                   </TableCell>
                   <TableCell>
                     <h5 className="text-sm">{row.amount}</h5>
@@ -254,16 +203,12 @@ const WithdrawalTable = ({ handleDetails }) => {
                   </TableCell>
                   <TableCell>
                     <span
-                      className={`${
-                        row.status === "Paid"
+                      className={`text-sm font-medium ${
+                        row.status === "Trial" || row.status === "Paid"
                           ? "bg-[#CDFDC6] text-[#04A755] px-2 py-1 rounded"
-                          : row.status === "Pending"
-                          ? "bg-[#FCF1E6] text-[#DD8800] px-2 py-1 rounded"
-                          : row.status === "Approved"
+                          : row.status === "Free Plan"
                           ? "bg-[#E6F0FF] text-[#2B7FFF] px-2 py-1 rounded"
-                          : row.status === "Rejected"
-                          ? "bg-[#FDEBEB] text-[#CB121D] px-2 py-1 rounded"
-                          : "bg-[#FDEBEB] text-[#CB121D] px-2 py-1 rounded"
+                          : "bg-[#F5F5F5] text-[#878787] px-2 py-1 rounded"
                       }`}
                     >
                       {row.status}
@@ -319,10 +264,10 @@ const WithdrawalTable = ({ handleDetails }) => {
 
       {/* Vendor Modal */}
       {showModal && selectedRow && (
-        <WithdrawModal row={selectedRow} onClose={closeModal} />
+        <SubscriptionModal row={selectedRow} onClose={closeModal} />
       )}
     </div>
   );
 };
 
-export default WithdrawalTable;
+export default SubscriptionList;

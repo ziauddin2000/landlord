@@ -245,3 +245,10 @@
 .animate-wave {
   animation: wave 1s infinite linear;
 }
+
+/* Withdraw Process */
+.withdraw-process-line {
+  width: 1px;
+  flex: 1;
+  min-height: 30px;
+}
